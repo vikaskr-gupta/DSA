@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct insertBeg
+{
+    int info;
+    struct insertBeg *next;
+} node;
+
+void display(node *start)
+{
+    node * temp;
+    temp = start;
+    while (temp!=NULL)
+    {
+        printf("%d\t", temp->info);
+        temp = temp->next;
+    }
+
+}
+
+void insert_at_beg(node **start, int item)
+{
+    node *temp;
+    temp = (node *)malloc(sizeof(node));
+    temp->info = item;
+    if (*start == NULL)
+        temp->next = NULL;
+    else
+       temp->next = *start;
+    *start = temp;
+}
+
+void main()
+{
+    node *head = NULL;
+    int item;
+    while(1)
+    {
+        printf("\nEnter item\n");
+        scanf("%d", &item);
+        insert_at_beg(&head, item);
+        printf("List is : ");
+        display(head);
+    }
+}
