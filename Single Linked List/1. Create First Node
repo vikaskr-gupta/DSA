@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+typedef struct node
+{
+    int info;
+    struct node *next;
+} node;
+
+node *create(node **start)
+{
+    *start = (node *)malloc(sizeof(node));
+    printf("Enter the data:");
+    scanf("%d", &(*start)->info);
+    (*start)->next = (node *)NULL;
+    return (*start);
+}
+
+void display(node **start)
+{
+    while (*start != NULL)
+    {
+        printf("[%d,%u]-->", (*start)->info, (*start)->next);
+        *start = (*start)->next;
+    }
+    printf("NULL");
+    printf("\npress any key to continue..........");
+    getch();
+}
+
+int main()
+{
+    node *head = NULL;
+    char choice;
+    do
+    {
+        head = create(&head);
+        display(&head);
+        printf("\nWant to create more?\n Type Y for Yes and N for No.\n");
+        fflush(stdin);
+        scanf("%c", &choice);
+    } while (choice == 'Y' || choice == 'N');
+}
